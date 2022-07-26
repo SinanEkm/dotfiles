@@ -1,0 +1,19 @@
+{
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.0/clangd_14.0.0/bin/clangd",
+  "python.jediEnabled": false ,
+  "python.pythonPath": "/usr/local/bin/python3.9",
+    "python.analysis.diagnosticSeverityOverrides": {
+       "reportUnusedImport": "warning",
+       "reportUnusedClass": "warning",
+       "reportUnusedFunction": "warning",
+       "reportUnusedVariable": "warning"
+    },
+    "python.linting.enabled":false,
+  "languageserver": {
+    "golang": {
+      "command": "/Users/sinanekmekcibasi/go/bin/gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
+}
