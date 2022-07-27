@@ -21,7 +21,9 @@ set cursorline              " highlight current cursorline
 set cursorlineopt=number
 set ttyfast                 " Speed up scrolling in Vim
 " let g:solarized_termcolors=256  
-set background=dark  
+set background=dark 
+set encoding=utf-8
+set guifont=Hack\ Nerd\ Font:12
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
@@ -34,19 +36,27 @@ inoremap " ""<Esc>ha
 inoremap ' ''<Esc>ha
 inoremap ` ``<Esc>ha
 
-
-" set path += '/usr/local/bin/gcc-11'
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 :tnoremap <Esc> <C-\><C-n>
 
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>]b :BufferLineCyclePrev<CR>
+
 " color schemes
- if (has("termguicolors"))
+if (has("termguicolors"))
  set termguicolors
- endif
- syntax enable
+endif
+syntax enable
 " open new split panes to right and below
 set splitright
 set splitbelow
+let g:airline_powerline_fonts = 1
+set completeopt=menu,menuone,noselect
+
 
 call plug#begin()
  Plug 'dracula/vim'
@@ -66,7 +76,17 @@ call plug#begin()
  Plug 'drewtempelmeyer/palenight.vim'
  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+ Plug 'nvim-lua/plenary.nvim'
+ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+ Plug 'lukas-reineke/indent-blankline.nvim'
+ Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+ "Plug 'kyazdani42/nvim-web-devicons'
  call plug#end()
+
+lua << EOF
+require("bufferline").setup{}
+EOF
 
  lua << END
  require('lualine').setup {
@@ -101,6 +121,29 @@ call plug#begin()
 END
 
 lua << END
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#405b76 gui=nocombine]]
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
+
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    
+    show_current_context = true,
+    show_current_context_start = true,
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+    },
+    show_end_of_line = true,
+    space_char_blankline = " ",
+    show_trailing_blankline_indent = false,
+    char_list = {
+        '|', '¦', '┆', '┊',
+    }, 
+}
+END
+
+lua << END
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust" },
@@ -117,16 +160,6 @@ require'nvim-treesitter.configs'.setup {
     -- `false` will disable the whole extension
     enable = true,
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    -- disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
 }
@@ -158,8 +191,6 @@ let g:go_list_type = "quickfix"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
-
-set background=dark
 "colorscheme falcon
 colorscheme nightfly 
 "colorscheme palenight
