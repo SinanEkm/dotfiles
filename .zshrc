@@ -127,3 +127,4 @@ alias gt="starship toggle gcloud disabled" # toggle gcloud info on the prompt
 autoload -Uz compinit && compinit
 bindkey '^I' complete-word
 zstyle -e ':completion:*' command-path 'reply=( "$PWD/bin" "$path[@]" )'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
