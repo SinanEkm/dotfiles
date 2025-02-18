@@ -11,7 +11,7 @@ AllowShortIfStatementsOnASingleLine: true  # Allow single-line if statements
 AllowShortBlocksOnASingleLine: true  # Allow short blocks on a single line
 AllowShortFunctionsOnASingleLine: None
 AlwaysBreakBeforeMultilineStrings: false
-BinPackArguments: false  # Disable packing arguments onto the same line
+BinPackArguments: true  # Disable packing arguments onto the same line
 BinPackParameters: false  # Disable packing parameters onto the same line
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Allman
