@@ -1,0 +1,48 @@
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveDeclarations: false  # Disable vertical alignment of variable names
+AlwaysBreakAfterDefinitionReturnType: None  # Keep return type on the same line as the function name
+AlwaysBreakAfterReturnType: None
+AlignEscapedNewlines: Right
+AlignOperands: true
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: false  # Force each parameter onto a new line
+AllowShortIfStatementsOnASingleLine: true  # Allow single-line if statements
+AllowShortBlocksOnASingleLine: true  # Allow short blocks on a single line
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakBeforeMultilineStrings: false
+BinPackArguments: false  # Disable packing arguments onto the same line
+BinPackParameters: false  # Disable packing parameters onto the same line
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Allman
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+ColumnLimit: 80
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+FixNamespaceComments: true
+IncludeBlocks: Preserve
+IndentCaseLabels: true
+IndentWidth: 4
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+PointerAlignment: Left
+ReflowComments: true
+SortIncludes: true
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: true
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: true
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+TabWidth: 2
+UseTab: Never
