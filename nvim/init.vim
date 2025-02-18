@@ -4,10 +4,10 @@ set ignorecase              " case insensitive
 set mouse=v                 " middle-click paste with 
 set hlsearch                " highlight search 
 set incsearch               " incremental search
-set tabstop=4               " number of columns occupied by a tab 
-set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+set tabstop=2               " number of columns occupied by a tab 
+set softtabstop=2           " see multiple spaces as tabstops so <BS> does the right thing
 set expandtab               " converts tabs to white space
-set shiftwidth=4            " width for autoindents
+set shiftwidth=2            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
@@ -29,12 +29,6 @@ set guifont=Hack\ Nerd\ Font:12
 " set backupdir=~/.cache/vim " Directory to store backup files.
 imap jj <Esc>
 imap ii <Esc>
-inoremap { {}<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap [ []<Esc>ha
-inoremap " ""<Esc>ha
-inoremap ' ''<Esc>ha
-inoremap ` ``<Esc>ha
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -57,6 +51,7 @@ set splitbelow
 let g:airline_powerline_fonts = 1
 set completeopt=menu,menuone,noselect
 
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 call plug#begin()
  Plug 'dracula/vim'
@@ -81,6 +76,8 @@ call plug#begin()
  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
  Plug 'lukas-reineke/indent-blankline.nvim'
  Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+ Plug 'morhetz/gruvbox'
+ Plug 'rstacruz/vim-closer'
  "Plug 'kyazdani42/nvim-web-devicons'
  call plug#end()
 
@@ -191,20 +188,15 @@ let g:go_list_type = "quickfix"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
-"colorscheme falcon
-colorscheme nightfly 
-"colorscheme palenight
+colorscheme gruvbox 
 let g:lightline = { 'colorscheme': 'nightfly' }
 let g:moonflyIgnoreDefaultColors = 1
-"colorscheme evening
-"colorscheme dracula
-"colorscheme darkBlue
-" Vimscript initialization file
-" let g:nightflyTerminalColors = 0
-"colorscheme PaperColor 
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
-"falcon settings
-    "let g:falcon_lightline = 1
-    "let g:falcon_airline = 1
-    "let g:lightline.colorscheme = 'falcon'
-    "let g:airline_theme = 'falcon'
+function! FormatOnSave()
+    let l:pos = getpos(".") " Store current cursor position
+    execute '%!clang-format'
+    call setpos('.', l:pos) " Restore cursor position
+endfunction
+
+autocmd BufWritePre *.cpp,*.h call FormatOnSave()
