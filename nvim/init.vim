@@ -200,3 +200,6 @@ function! FormatOnSave()
 endfunction
 
 autocmd BufWritePre *.cpp,*.h call FormatOnSave()
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
